@@ -1,3 +1,6 @@
+// Global theme components
+
+
 const Theme = {
   colors: {
     main: "teal",
