@@ -2,6 +2,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
+import Cliniques from './components/Cliniques'
 
 const StyledAppContainer = styled.div`
 min-width: 100vw;
@@ -29,7 +30,7 @@ function App() {
   return (
     <StyledAppContainer>
     <StyledWrapper>
-
+    <Cliniques/>
     </StyledWrapper>
     </StyledAppContainer>
   )
