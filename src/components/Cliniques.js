@@ -62,25 +62,44 @@ const StyledLoader = styled.div`
 }
 `
 
-function Cliniques({ city }) {
+const StyledCity = styled.div`
+display: inline-flex;
+padding: 12px;
+border-radius: 20px;
+border: 1px solid lightblue;
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+margin: 5px;
+&:hover {
+  background: lightblue;
+}
+`
+
+function Cliniques({ county }) {
 const [cliniques, setCliniques] = useState([])
+const [cities, setCities] = useState([])
 const [isLoading, setIsLoading] = useState(true)
 const [appointmentTypes, setAppointmentTypes] = useState([])
+const [renderState, setRenderState] = useState(1)
   
 useEffect(() => { 
     async function fetchData () {
-      await getCliniques(setCliniques, city)
+      await getCliniques(setCliniques, county)
     }
     fetchData()
-   },[city])
+    
+   },[county])
 
    console.log(cliniques)
 
-  //  useEffect(() => { 
-  //   cliniques.length > 0 && getAppointmentTypes(setAppointmentTypes, 1546)
-    
-  // },[cliniques])
-  //  console.log(appointmentTypes)
+   useEffect(() => { 
+    if (cliniques.length > 0) {
+      const cityArray = cliniques.map(clinique => clinique.city)
+      setCities([...new Set(cityArray)].filter(city => city.length > 0).sort())
+      
+    }
+  },[cliniques])
+  
+  console.log(cities)
 
    useEffect(() => {
     const timeId = setTimeout(() => {
@@ -92,6 +111,16 @@ useEffect(() => {
     }   
   },[isLoading, setIsLoading])
    
+  function handleCity({ target }) {
+    const stationIds = cliniques
+      .filter(clinique => clinique.city === target.textContent)  
+      .map(clinique => clinique.id)
+    stationIds.map(id => { 
+      getAppointmentTypes(setAppointmentTypes, id)
+      console.log(appointmentTypes)
+      return id
+    })
+  }
    
 
   return (
@@ -99,11 +128,11 @@ useEffect(() => {
     <StyledLoader>
       <div/>
     </StyledLoader>
-  : appointmentTypes.map(appointmentType => {
+  : (cities.map((city, index) => {
     return (
-      <div>{appointmentType.name}</div>
+      <StyledCity onClick={handleCity} key={index}>{city}</StyledCity>
     )
-  })
+  }))
   )
 }
 

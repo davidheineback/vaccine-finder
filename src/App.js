@@ -46,11 +46,11 @@ const StyledInput = styled.input`
 `
 
 function App() {
-  const [city, setCity] = useState('')
+  const [county, setCounty] = useState('')
   const [renderState, setRenderState] = useState(1)
 
   function handleCity ({ target }) {
-    setCity(target.value)
+    setCounty(target.value)
   }
 
   function handleCityFilter () {
@@ -62,12 +62,12 @@ function App() {
     <StyledWrapper>
     {renderState === 1 &&
     <>
-      <StyledInput onChange={handleCity} placeholder='Skriv din postort...'/>
+      <StyledInput onChange={handleCity} placeholder='Skriv din region...'/>
       <Button onClick={handleCityFilter} btnType="primary">Påbörja sök</Button>
     </>
     }
     {renderState === 2 &&
-      <Cliniques city={city}/>
+      <Cliniques county={county}/>
     }
     </StyledWrapper>
     </StyledAppContainer>
