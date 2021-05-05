@@ -1,8 +1,9 @@
 // main App component
 
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Cliniques from './components/Cliniques'
+import Button from './Utilities/Button'
 
 const StyledAppContainer = styled.div`
 min-width: 100vw;
@@ -24,13 +25,42 @@ const StyledWrapper = styled.div`
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   transform: translate(-50%, -50%);
+  text-align: center;
+`
+
+const StyledInput = styled.input`
+  width: 250px;
+  padding: 0.4rem;
+  border-radius: 50px;
+  text-align: center;
+  appearance: none;
+  background: inherit;
+  border: transparent;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-top: 25%;
+  &:focus {
+    outline: none;
+    background: white;
+  } 
 `
 
 function App() {
+  const [city, setCity] = useState('')
+
+  function handleCity ({ target }) {
+    setCity(target.value)
+  }
+
+  function handleLogin () {
+
+  }
+
   return (
     <StyledAppContainer>
     <StyledWrapper>
     <Cliniques/>
+    <StyledInput onChange={handleCity} placeholder='Skriv din postort..'/>
+    <Button onClick={handleLogin} btnType="primary">Påbörja sök</Button>
     </StyledWrapper>
     </StyledAppContainer>
   )
