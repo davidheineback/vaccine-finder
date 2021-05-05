@@ -46,21 +46,30 @@ const StyledInput = styled.input`
 
 function App() {
   const [city, setCity] = useState('')
+  const [renderState, setRenderState] = useState(1)
 
   function handleCity ({ target }) {
     setCity(target.value)
   }
 
-  function handleLogin () {
-
+  function handleCityFilter () {
+    setRenderState(2)
   }
 
   return (
     <StyledAppContainer>
     <StyledWrapper>
-    <Cliniques/>
-    <StyledInput onChange={handleCity} placeholder='Skriv din postort..'/>
-    <Button onClick={handleLogin} btnType="primary">Påbörja sök</Button>
+    {renderState === 1 &&
+    <>
+      <StyledInput onChange={handleCity} placeholder='Skriv din postort..'/>
+      <Button onClick={handleCityFilter} btnType="primary">Påbörja sök</Button>
+    </>
+    }
+      {renderState === 2 &&
+    <>
+      <Cliniques city={city}/>
+    </>
+    }
     </StyledWrapper>
     </StyledAppContainer>
   )

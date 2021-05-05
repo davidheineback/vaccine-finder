@@ -32,8 +32,6 @@ ${props => props.btnType === 'primary' && {
 `
 
 function Button({ btnType, onClick, children }) {
-
-
   return (
     <StyledButton
       type="button"
