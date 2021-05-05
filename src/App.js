@@ -38,6 +38,7 @@ const StyledInput = styled.input`
   border: transparent;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   margin-top: 25%;
+  overflow: scroll;
   &:focus {
     outline: none;
     background: white;
@@ -61,14 +62,12 @@ function App() {
     <StyledWrapper>
     {renderState === 1 &&
     <>
-      <StyledInput onChange={handleCity} placeholder='Skriv din postort..'/>
+      <StyledInput onChange={handleCity} placeholder='Skriv din postort...'/>
       <Button onClick={handleCityFilter} btnType="primary">Påbörja sök</Button>
     </>
     }
-      {renderState === 2 &&
-    <>
+    {renderState === 2 &&
       <Cliniques city={city}/>
-    </>
     }
     </StyledWrapper>
     </StyledAppContainer>

@@ -10,3 +10,15 @@ export async function getCliniques(setCliniques, city) {
     throw new Error(error)
   }
 }
+
+export async function getAppointmentTypes(setAppointmentType, station) {
+  try {
+    const categories = await fetch(`https://booking-api.mittvaccin.se/clinique/${station}/appointmentTypes`)
+    const response = await categories.json()
+    setAppointmentType(response)
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+
