@@ -6,7 +6,6 @@ import Button from '../Utilities/Button/Button'
 import { StyledAppContainer, StyledInput, StyledWrapper } from './StyledApp'
 
 
-
 function App() {
   const [county, setCounty] = useState('')
   const [renderState, setRenderState] = useState(1)
