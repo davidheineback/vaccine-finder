@@ -1,10 +1,17 @@
+// Render component
+
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import GlobalStyle from './themes/GlobalStyle.js'
+import Theme from './themes/Theme.js'
+import { ThemeProvider } from 'styled-components'
+import App from './App/App'
 
 ReactDOM.render(
-  <React.StrictMode>
+  <ThemeProvider theme={Theme}>
+    <GlobalStyle/>
     <App />
-  </React.StrictMode>,
+  </ThemeProvider>,
   document.getElementById('root')
-);
+)
+
