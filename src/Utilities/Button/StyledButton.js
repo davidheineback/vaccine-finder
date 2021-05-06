@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import React from 'react'
 
 export const StyledButton = styled.button`
 appearance: none;
@@ -30,18 +29,3 @@ ${props => props.btnType === 'primary' && {
   }
 }}
 `
-
-function Button({ btnType, onClick, children }) {
-  return (
-    <StyledButton
-      type="button"
-      onClick={onClick}
-      btnType={btnType}>
-      {children}
-      </StyledButton>
-  )
-}
-
-export default Button
-
-
