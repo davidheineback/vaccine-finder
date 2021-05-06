@@ -122,7 +122,6 @@ useEffect(() => {
     })
   }
    
-
   return (
     isLoading ?
     <StyledLoader>
