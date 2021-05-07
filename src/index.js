@@ -1,5 +1,3 @@
-// Render component
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import GlobalStyle from './themes/GlobalStyle.js'
