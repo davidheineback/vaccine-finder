@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { getCliniques, getAppointmentTypes } from '../../App/fetch.js'
 import { StyledCity, StyledLoader } from './StyledCliniques'
+import { GlobalStateContext } from '../../GlobalState/GlobalState'
 
 
-
-
-function Cliniques({ county }) {
+function Cliniques() {
+const { county } = React.useContext(GlobalStateContext)
 const [cliniques, setCliniques] = useState([])
 const [cities, setCities] = useState([])
 const [isLoading, setIsLoading] = useState(true)
 const [appointmentTypes, setAppointmentTypes] = useState([])
-const [renderState, setRenderState] = useState(1)
   
 useEffect(() => { 
     async function fetchData () {

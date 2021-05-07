@@ -1,38 +1,24 @@
-// main App component
-
-import React, { useState } from 'react'
+import React from 'react'
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
+import { StyledAppContainer, StyledWrapper } from './StyledApp'
+import GlobalState from '../GlobalState/GlobalState'
 import Cliniques from '../components/Cliniques/Cliniques'
-import Button from '../Utilities/Button/Button'
-import { StyledAppContainer, StyledInput, StyledWrapper } from './StyledApp'
-
-
+import SearchView from '../components/SearchView/SearchView'
 
 function App() {
-  const [county, setCounty] = useState('')
-  const [renderState, setRenderState] = useState(1)
-
-  function handleCity ({ target }) {
-    setCounty(target.value)
-  }
-
-  function handleCityFilter () {
-    setRenderState(2)
-  }
-
   return (
+  <GlobalState>
+    <Router>
     <StyledAppContainer>
     <StyledWrapper>
-    {renderState === 1 &&
-    <>
-      <StyledInput onChange={handleCity} placeholder='Skriv din region...'/>
-      <Button onClick={handleCityFilter} btnType="primary">Påbörja sök</Button>
-    </>
-    }
-    {renderState === 2 &&
-      <Cliniques county={county}/>
-    }
+      <Switch>
+      <Route exact path='/' component={SearchView}/>
+            <Route path='/cliniques' exact component={Cliniques}/>
+      </Switch>
     </StyledWrapper>
     </StyledAppContainer>
+    </Router>
+  </GlobalState>
   )
 }
 
