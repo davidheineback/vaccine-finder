@@ -3,17 +3,15 @@ import { Redirect } from 'react-router-dom'
 import { getCliniques, getAppointmentTypes } from '../../App/fetch.js'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
 import { Loader } from '../../Utilities/Loader/Loader'
+import { StyledHeartIcon } from './CliniqueStyles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import FavoriteIcon from '@material-ui/icons/Favorite'
 import Divider from '@material-ui/core/Divider'
 
 function Cliniques() {
-  const { county, setAppointmentData, appointmentData } = React.useContext(
-    GlobalStateContext
-  )
+  const { county, setAppointmentData, appointmentData } = React.useContext(GlobalStateContext)
   const [cliniques, setCliniques] = useState([])
   const [cities, setCities] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -75,7 +73,7 @@ function Cliniques() {
           <ListItem button onClick={handleCity} key={index}>
             <ListItemText primary={city} />
             <ListItemIcon>
-              <FavoriteIcon />
+              <StyledHeartIcon />
             </ListItemIcon>
           </ListItem>
           <Divider variant='inset' component='li' />
