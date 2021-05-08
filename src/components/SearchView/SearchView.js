@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Redirect } from 'react-router-dom'
 import Button from '../../Utilities/Button/Button'
 import { StyledInput } from './SearchViewStyles'
@@ -6,8 +6,8 @@ import { GlobalStateContext } from '../../GlobalState/GlobalState'
 
 
 function SearchView() {
-const { setCounty } = React.useContext(GlobalStateContext)
-const [redirect, setRedirect] = useState(false)
+const { setCounty, redirect, setRedirect } = React.useContext(GlobalStateContext)
+
 
 function handleCity ({ target }) {
   setCounty(target.value)

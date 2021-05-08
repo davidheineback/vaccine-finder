@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
 import { getCliniques, getAppointmentTypes } from '../../App/fetch.js'
-import { StyledCity, StyledLoader } from './StyledCliniques'
+import { StyledCity } from './StyledCliniques'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
+import { Loader } from '../../Utilities/Loader/Loader'
 
 
 function Cliniques() {
-const { county } = React.useContext(GlobalStateContext)
+const { county, setAppointmentData, appointmentData } = React.useContext(GlobalStateContext)
 const [cliniques, setCliniques] = useState([])
 const [cities, setCities] = useState([])
 const [isLoading, setIsLoading] = useState(true)
@@ -15,7 +17,7 @@ useEffect(() => {
     async function fetchData () {
       await getCliniques(setCliniques, county)
     }
-    fetchData()
+    county && fetchData()
     
    },[county])
 
@@ -25,12 +27,10 @@ useEffect(() => {
     if (cliniques.length > 0) {
       const cityArray = cliniques.map(clinique => clinique.city)
       setCities([...new Set(cityArray)].filter(city => city.length > 0).sort())
-      
+
     }
   },[cliniques])
   
-  console.log(cities)
-
    useEffect(() => {
     const timeId = setTimeout(() => {
       setIsLoading(false)
@@ -43,25 +43,23 @@ useEffect(() => {
    
   function handleCity({ target }) {
     const stationIds = cliniques
-      .filter(clinique => clinique.city === target.textContent)  
+      .filter(clinique => clinique.style.toLowerCase() === target.textContent.toLowerCase() 
+      || clinique.name.toLowerCase().includes(target.textContent.toLowerCase()))  
       .map(clinique => clinique.id)
-    stationIds.map(id => { 
-      getAppointmentTypes(setAppointmentTypes, id)
-      console.log(appointmentTypes)
-      return id
+    console.log(stationIds)
+    const data = stationIds.map(async (id) => { 
+      await getAppointmentTypes(setAppointmentTypes, id)
+      return {id, appointmentTypes}
     })
+    console.log(data)
+    setAppointmentData(data)
   }
    
+  if (!county) return (<Redirect to='./'/>)
+  if (appointmentData) return (<Redirect to='./appointment'/>)
   return (
-    isLoading ?
-    <StyledLoader>
-      <div/>
-    </StyledLoader>
-  : (cities.map((city, index) => {
-    return (
-      <StyledCity onClick={handleCity} key={index}>{city}</StyledCity>
-    )
-  }))
+      isLoading ? <Loader/>
+    : (cities.map((city, index) => <StyledCity onClick={handleCity} key={index}>{city}</StyledCity>))
   )
 }
 
