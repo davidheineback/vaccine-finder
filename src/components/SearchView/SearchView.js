@@ -5,8 +5,7 @@ import { StyledInput, StyledForm } from './SearchViewStyles'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
 import {
   FormControl,
-  InputLabel,
-  Input
+  InputLabel
 } from '@material-ui/core'
 
 function SearchView() {

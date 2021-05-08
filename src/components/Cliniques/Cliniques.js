@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { getCliniques, getAppointmentTypes } from '../../App/fetch.js'
-import { StyledCity } from './StyledCliniques'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
 import { Loader } from '../../Utilities/Loader/Loader'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import Divider from '@material-ui/core/Divider'
 
 function Cliniques() {
   const { county, setAppointmentData, appointmentData } = React.useContext(
@@ -64,11 +69,19 @@ function Cliniques() {
   return isLoading ? (
     <Loader />
   ) : (
-    cities.map((city, index) => (
-      <StyledCity onClick={handleCity} key={index}>
-        {city}
-      </StyledCity>
-    ))
+    <List component='nav' aria-label='main mailbox folders'>
+      {cities.map((city, index) => (
+        <>
+          <ListItem button onClick={handleCity} key={index}>
+            <ListItemText primary={city} />
+            <ListItemIcon>
+              <FavoriteIcon />
+            </ListItemIcon>
+          </ListItem>
+          <Divider variant='inset' component='li' />
+        </>
+      ))}
+    </List>
   )
 }
 
