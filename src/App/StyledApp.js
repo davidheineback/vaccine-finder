@@ -1,10 +1,5 @@
 import styled from 'styled-components'
 
-export const StyledAppContainer = styled.div`
-min-width: 100vw;
-min-height: 100vh;
-background: linear-gradient(290deg, rgba(148,187,233,0.8813726174063375) 11%, rgba(174,238,181,0.9009804605435925) 100%); 
-`
 
 export const StyledWrapper = styled.div`
   position: absolute;

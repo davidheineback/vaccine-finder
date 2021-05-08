@@ -1,16 +1,17 @@
 import React from 'react'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
-import { StyledAppContainer, StyledWrapper } from './StyledApp'
+import {  StyledWrapper } from './StyledApp'
 import GlobalState from '../GlobalState/GlobalState'
 import Cliniques from '../components/Cliniques/Cliniques'
 import SearchView from '../components/SearchView/SearchView'
 import SelectAppointment from '../components/SelectAppointment/SelectAppointment'
+import AppContainer from '../components/AppContainer/AppContainer'
 
 function App() {
   return (
     <GlobalState>
       <Router>
-        <StyledAppContainer>
+        <AppContainer>
           <StyledWrapper>
             <Switch>
               <Route path='/' exact  component={SearchView} />
@@ -18,7 +19,7 @@ function App() {
               <Route path='/appointment' exact component={SelectAppointment} />
             </Switch>
           </StyledWrapper>
-        </StyledAppContainer>
+        </AppContainer>
       </Router>
     </GlobalState>
   )
