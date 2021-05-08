@@ -8,19 +8,19 @@ import SelectAppointment from '../components/SelectAppointment/SelectAppointment
 
 function App() {
   return (
-  <GlobalState>
-    <Router>
-    <StyledAppContainer>
-    <StyledWrapper>
-      <Switch>
-      <Route exact path='/' component={SearchView}/>
-            <Route path='/cliniques' exact component={Cliniques}/>
-            <Route path='/appointment' exact component={SelectAppointment}/>
-      </Switch>
-    </StyledWrapper>
-    </StyledAppContainer>
-    </Router>
-  </GlobalState>
+    <GlobalState>
+      <Router>
+        <StyledAppContainer>
+          <StyledWrapper>
+            <Switch>
+              <Route path='/' exact  component={SearchView} />
+              <Route path='/cliniques' exact component={Cliniques} />
+              <Route path='/appointment' exact component={SelectAppointment} />
+            </Switch>
+          </StyledWrapper>
+        </StyledAppContainer>
+      </Router>
+    </GlobalState>
   )
 }
 

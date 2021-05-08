@@ -14,5 +14,5 @@ export const StyledInput = styled.input`
   &:focus {
     outline: none;
     background: white;
-  } 
+  }
 `
