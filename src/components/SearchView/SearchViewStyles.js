@@ -1,18 +1,19 @@
 import styled from 'styled-components'
+import { Input } from '@material-ui/core'
 
-export const StyledInput = styled.input`
+export const StyledInput = styled(Input)`
   width: 250px;
   padding: 0.4rem;
-  border-radius: 50px;
-  text-align: center;
-  appearance: none;
-  background: inherit;
-  border: transparent;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   margin-top: 25%;
-  overflow: scroll;
   &:focus {
     outline: none;
     background: white;
-  } 
+  }
+`
+
+export const StyledForm = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `
