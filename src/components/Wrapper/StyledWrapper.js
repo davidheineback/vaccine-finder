@@ -16,4 +16,9 @@ export const StyledWrapper = styled(Box)`
   -webkit-backdrop-filter: blur(1.5px);
   border-radius: 10px;
   text-align: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  padding:1rem;
 `
