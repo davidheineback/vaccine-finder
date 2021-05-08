@@ -1,22 +1,24 @@
 import React from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
+import styled  from 'styled-components'
 
-
+const StyledAppContainer = styled(Container)`
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+`
 
 const AppContainer = ({children}) => {
 
   return (
     <>
       <CssBaseline />
-      <Container maxWidth='sm'>
-        <Typography
-          component='div'
-          style={{ height: '100vh' }}
-        />
-        {children}
-      </Container>
+      <StyledAppContainer maxWidth='lg'>
+      {children}
+
+      </StyledAppContainer>
     </>
   )
 }
