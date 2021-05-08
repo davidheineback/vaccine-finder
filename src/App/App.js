@@ -4,6 +4,7 @@ import { StyledAppContainer, StyledWrapper } from './StyledApp'
 import GlobalState from '../GlobalState/GlobalState'
 import Cliniques from '../components/Cliniques/Cliniques'
 import SearchView from '../components/SearchView/SearchView'
+import SelectAppointment from '../components/SelectAppointment/SelectAppointment'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Switch>
       <Route exact path='/' component={SearchView}/>
             <Route path='/cliniques' exact component={Cliniques}/>
+            <Route path='/appointment' exact component={SelectAppointment}/>
       </Switch>
     </StyledWrapper>
     </StyledAppContainer>
