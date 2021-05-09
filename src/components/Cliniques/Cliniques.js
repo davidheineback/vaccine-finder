@@ -69,15 +69,15 @@ function Cliniques() {
   ) : (
     <List component='nav' aria-label='main mailbox folders'>
       {cities.map((city, index) => (
-        <>
-          <ListItem button onClick={handleCity} key={index}>
+        <div key={index}>
+          <ListItem button onClick={handleCity}>
             <ListItemText primary={city} />
             <ListItemIcon>
               <StyledHeartIcon />
             </ListItemIcon>
           </ListItem>
           <Divider variant='inset' component='li' />
-        </>
+        </div>
       ))}
     </List>
   )
