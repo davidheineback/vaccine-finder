@@ -1,0 +1,74 @@
+import React, { useState, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
+import * as API from '../../App/fetch.js'
+import { GlobalStateContext } from '../../GlobalState/GlobalState'
+import { Loader } from '../../Utilities/Loader/Loader'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Divider from '@material-ui/core/Divider'
+
+function Cliniques() {
+  const { cliniques, county, setAppointmentData } = React.useContext(GlobalStateContext)
+  const [cities, setCities] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [appointmentDataReady, setAppointmentDataReady] = useState(false)
+
+  console.log(cliniques)
+
+  useEffect(() => {
+    if (cliniques.length > 0) {
+      const cityArray = cliniques.map((clinique) => clinique.city)
+      setCities(
+        [...new Set(cityArray)].filter((city) => city.length > 0).sort()
+      )
+    }
+  }, [cliniques])
+
+  useEffect(() => {
+    const timeId = setTimeout(() => {
+      setIsLoading(false)
+    }, 2000)
+
+    return () => {
+      clearTimeout(timeId)
+    }
+  }, [isLoading, setIsLoading])
+
+
+
+  async function handleCity({ target }) {
+    const stationIds = cliniques
+      .filter(
+        (clinique) => clinique.booking_auto_search && (clinique.name.toLowerCase().includes(target.textContent.toLowerCase()) || clinique.city.toLowerCase().includes(target.textContent.toLowerCase()))
+      )
+      .map((clinique) => clinique.id)
+    console.log(stationIds)
+    const data = stationIds.map(async (id) => {
+      const response = await API.getAppointmentTypes(id)
+      return { id, response }
+    })
+    const newData = await Promise.all(data)
+    setAppointmentData(newData)
+    setAppointmentDataReady(true)
+  }
+
+  if (!county) return <Redirect to='./' />
+  if (appointmentDataReady) return <Redirect to='./appointment'/>
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <List component='nav' aria-label='main mailbox folders'>
+      {cities.map((city, index) => (
+        <div key={index}>
+          <ListItem button onClick={handleCity}>
+            <ListItemText primary={city} />
+          </ListItem>
+          <Divider variant='inset' component='li' />
+        </div>
+      ))}
+    </List>
+  )
+}
+
+export default Cliniques

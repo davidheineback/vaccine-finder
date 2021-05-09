@@ -4,7 +4,7 @@ import { StyledLoader } from './StyledLoader'
 export function Loader() {
   return (
     <StyledLoader>
-      <div/>
+      <div />
     </StyledLoader>
   )
 }

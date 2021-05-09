@@ -7,9 +7,8 @@ import App from './App/App'
 
 ReactDOM.render(
   <ThemeProvider theme={Theme}>
-    <GlobalStyle/>
+    <GlobalStyle />
     <App />
   </ThemeProvider>,
   document.getElementById('root')
 )
-
