@@ -7,7 +7,7 @@ import StartView from '../Views/StartView/StartView'
 // import SearchView from '../components/SearchView/SearchView'
 import SelectAppointment from '../Views/SelectAppointment/SelectAppointment'
 import AppContainer from '../Views/AppContainer/AppContainer'
-import Wrapper from '../Views/Wrapper/Wrapper'
+import Wrapper from '../Components/Wrapper/Wrapper'
 
 // REGION HALLAND // REGION VÄSTERNORRLAND // REGION KALMAR LÄN // REGION ÖSTERGÖTLAND
 
