@@ -6,6 +6,7 @@ export default function GlobalState({ children }) {
   const [county, setCounty] = useState()
   const [redirect, setRedirect] = useState(false)
   const [appointmentData, setAppointmentData] = useState()
+  const [cliniques, setCliniques] = useState([])
 
   const state = {
     county,
@@ -13,7 +14,9 @@ export default function GlobalState({ children }) {
     redirect,
     setRedirect,
     appointmentData,
-    setAppointmentData
+    setAppointmentData,
+    cliniques,
+    setCliniques
   }
 
   return (
