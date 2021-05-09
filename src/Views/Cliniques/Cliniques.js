@@ -1,28 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
-import { getCliniques, getAppointmentTypes } from '../../App/fetch.js'
+import * as API from '../../App/fetch.js'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
 import { Loader } from '../../Utilities/Loader/Loader'
-import { StyledHeartIcon } from './CliniqueStyles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
 import Divider from '@material-ui/core/Divider'
 
 function Cliniques() {
-  const { county, setAppointmentData, appointmentData } = React.useContext(GlobalStateContext)
-  const [cliniques, setCliniques] = useState([])
+  const { cliniques, county, setAppointmentData } = React.useContext(GlobalStateContext)
   const [cities, setCities] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [appointmentTypes, setAppointmentTypes] = useState([])
-
-  useEffect(() => {
-    async function fetchData() {
-      await getCliniques(setCliniques, county)
-    }
-    county && fetchData()
-  }, [county])
+  const [appointmentDataReady, setAppointmentDataReady] = useState(false)
 
   console.log(cliniques)
 
@@ -38,46 +28,44 @@ function Cliniques() {
   useEffect(() => {
     const timeId = setTimeout(() => {
       setIsLoading(false)
-    }, 3000)
+    }, 2000)
 
     return () => {
       clearTimeout(timeId)
     }
   }, [isLoading, setIsLoading])
 
-  function handleCity({ target }) {
+
+
+  async function handleCity({ target }) {
     const stationIds = cliniques
       .filter(
-        (clinique) =>
-          clinique.style.toLowerCase() === target.textContent.toLowerCase() ||
-          clinique.name.toLowerCase().includes(target.textContent.toLowerCase())
+        (clinique) => clinique.booking_auto_search && (clinique.name.toLowerCase().includes(target.textContent.toLowerCase()) || clinique.city.toLowerCase().includes(target.textContent.toLowerCase()))
       )
       .map((clinique) => clinique.id)
     console.log(stationIds)
     const data = stationIds.map(async (id) => {
-      await getAppointmentTypes(setAppointmentTypes, id)
-      return { id, appointmentTypes }
+      const response = await API.getAppointmentTypes(id)
+      return { id, response }
     })
-    console.log(data)
-    setAppointmentData(data)
+    const newData = await Promise.all(data)
+    setAppointmentData(newData)
+    setAppointmentDataReady(true)
   }
 
   if (!county) return <Redirect to='./' />
-  if (appointmentData) return <Redirect to='./appointment' />
+  if (appointmentDataReady) return <Redirect to='./appointment'/>
   return isLoading ? (
     <Loader />
   ) : (
     <List component='nav' aria-label='main mailbox folders'>
       {cities.map((city, index) => (
-        <>
-          <ListItem button onClick={handleCity} key={index}>
+        <div key={index}>
+          <ListItem button onClick={handleCity}>
             <ListItemText primary={city} />
-            <ListItemIcon>
-              <StyledHeartIcon />
-            </ListItemIcon>
           </ListItem>
           <Divider variant='inset' component='li' />
-        </>
+        </div>
       ))}
     </List>
   )
