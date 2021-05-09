@@ -3,11 +3,9 @@ import { Redirect } from 'react-router-dom'
 import { getCliniques, getAppointmentTypes } from '../../App/fetch.js'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
 import { Loader } from '../../Utilities/Loader/Loader'
-import { StyledHeartIcon } from './CliniqueStyles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
 import Divider from '@material-ui/core/Divider'
 
 function Cliniques() {
@@ -50,7 +48,8 @@ function Cliniques() {
       .filter(
         (clinique) =>
           clinique.style.toLowerCase() === target.textContent.toLowerCase() ||
-          clinique.name.toLowerCase().includes(target.textContent.toLowerCase())
+          clinique.name.toLowerCase().includes(target.textContent.toLowerCase()) ||
+          clinique.city.toLowerCase().includes(target.textContent.toLowerCase())
       )
       .map((clinique) => clinique.id)
     console.log(stationIds)
@@ -72,9 +71,6 @@ function Cliniques() {
         <div key={index}>
           <ListItem button onClick={handleCity}>
             <ListItemText primary={city} />
-            <ListItemIcon>
-              <StyledHeartIcon />
-            </ListItemIcon>
           </ListItem>
           <Divider variant='inset' component='li' />
         </div>
