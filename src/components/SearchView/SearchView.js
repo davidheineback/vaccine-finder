@@ -3,10 +3,7 @@ import { Redirect } from 'react-router-dom'
 import Button from '../../Utilities/Button/Button'
 import { StyledInput, StyledForm } from './SearchViewStyles'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
-import {
-  FormControl,
-  InputLabel
-} from '@material-ui/core'
+import { FormControl, InputLabel } from '@material-ui/core'
 
 function SearchView() {
   const { setCounty, redirect, setRedirect } = React.useContext(

@@ -1,0 +1,1 @@
+GET https://booking-api.mittvaccin.se/clinique/1546/appointments/14644/slots/210510-210810
