@@ -21,3 +21,12 @@ export async function getAppointmentTypes (station) {
     throw new Error(error)
   }
 }
+
+export async function getAvailableTimes(station, dateFrom, dateTo) {
+  const allTimes = await fetch(`https://booking-api.mittvaccin.se/clinique/${station.id}/appointments/${station.response[0].id}/slots/${dateFrom}-${dateTo}`)
+  const response = await allTimes.json()
+  console.log(response)
+  const available = response.filter(date => date.slots.available)
+  console.log(available)
+  return response
+}

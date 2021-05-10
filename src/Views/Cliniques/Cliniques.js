@@ -14,8 +14,6 @@ function Cliniques() {
   const [isLoading, setIsLoading] = useState(true)
   const [appointmentDataReady, setAppointmentDataReady] = useState(false)
 
-  console.log(cliniques)
-
   useEffect(() => {
     if (cliniques.length > 0) {
       const cityArray = cliniques.map((clinique) => clinique.city)
@@ -43,7 +41,6 @@ function Cliniques() {
         (clinique) => clinique.booking_auto_search && (clinique.name.toLowerCase().includes(target.textContent.toLowerCase()) || clinique.city.toLowerCase().includes(target.textContent.toLowerCase()))
       )
       .map((clinique) => clinique.id)
-    console.log(stationIds)
     const data = stationIds.map(async (id) => {
       const response = await API.getAppointmentTypes(id)
       return { id, response }
@@ -54,7 +51,8 @@ function Cliniques() {
   }
 
   if (!county) return <Redirect to='./' />
-  if (appointmentDataReady) return <Redirect to='./appointment'/>
+  if (appointmentDataReady) return <Redirect to='./sok-metod'/>
+  // if (appointmentDataReady) return <Redirect to='./appointment'/>
   return isLoading ? (
     <Loader />
   ) : (
