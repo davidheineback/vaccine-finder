@@ -12,7 +12,7 @@ import { GlobalStateContext } from '../../GlobalState/GlobalState'
 // REGION HALLAND // REGION VÄSTERNORRLAND // REGION KALMAR LÄN // REGION ÖSTERGÖTLAND
 
 function StartView() {
-  const { cliniques, setCliniques, setCounty, redirect, setRedirect } = React.useContext(
+  const { setCliniques, setCounty, redirect, setRedirect } = React.useContext(
     GlobalStateContext
   )
 
@@ -21,11 +21,10 @@ function StartView() {
   const handleClick = async (searchString) => {
     setCounty(searchString)
     await API.getCliniques(setCliniques, searchString) 
-    console.log(cliniques)
     setRedirect(true)
   }
   
-  if (redirect) return <Redirect to='/cliniques'/>
+  if (redirect) return <Redirect to='/mottagningar'/>
   return (
     <div >
       <List component="nav" aria-label="tillgängliga regioner">
