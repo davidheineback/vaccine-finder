@@ -28,5 +28,5 @@ export async function getAvailableTimes(station, dateFrom, dateTo) {
   console.log(response)
   const available = response.filter(date => date.slots.available)
   console.log(available)
-  return response
+  return available
 }
