@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import moment from 'moment'
 
 export const GlobalStateContext = React.createContext(null)
 
@@ -7,7 +8,8 @@ export default function GlobalState({ children }) {
   const [redirect, setRedirect] = useState(false)
   const [appointmentData, setAppointmentData] = useState()
   const [cliniques, setCliniques] = useState([])
-  const [searchStrategy, setSearchStrategy] = useState()
+  const [fromDate, setFromDate] = useState(moment().format("YYMMDD"))
+  const [toDate, setToDate] = useState(moment().add(3, 'days').format("YYMMDD"))
  
   const state = {
     county,
@@ -18,8 +20,10 @@ export default function GlobalState({ children }) {
     setAppointmentData,
     cliniques,
     setCliniques,
-    searchStrategy,
-    setSearchStrategy
+    fromDate,
+    setFromDate,
+    toDate,
+    setToDate
   }
 
   return (

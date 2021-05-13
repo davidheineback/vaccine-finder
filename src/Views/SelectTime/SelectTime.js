@@ -7,12 +7,12 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 import * as API from '../../App/fetch'
-import moment from 'moment'
 
 
 function SelectTime() {
-  const { appointmentData, searchStrategy } = React.useContext(GlobalStateContext)
+  const { appointmentData, searchStrategy, fromDate, toDate } = React.useContext(GlobalStateContext)
   const [isLoading, setIsLoading] = useState(true)
+  const [availableTimes, setAvailableTime] = useState()
   console.log(appointmentData)
 
 
@@ -21,37 +21,43 @@ function SelectTime() {
     async function handleSearchNext() {
       const data = appointmentData.map(async (appointment) => {
         if (appointment.response.length > 0) {
-          const response = await API.getAvailableTimes(appointment, moment().format("YYMMDD"), moment().add(30, 'days').format("YYMMDD"))
+          const response = await API.getAvailableTimes(appointment, fromDate, toDate)
           return response
         }
       })
       const newData = await Promise.all(data)
-      setIsLoading(false)
+      setAvailableTime(newData.filter(filter => filter.length > 0))
       console.log(newData)
+      setIsLoading(false)
     }
 
-    searchStrategy === 'next' && handleSearchNext()
+    handleSearchNext()
 
-  },[searchStrategy, appointmentData])
+  },[searchStrategy, appointmentData, fromDate, toDate ])
 
   
 
   if (!appointmentData) return <Redirect to='./' />
-  
-  
-  
   return (
     isLoading ? <Loader/>
-    :
+    : availableTimes.length < 1 ?
     <List component='nav' aria-label='main mailbox folders'>
       <ListItem>
-        <ListItemText primary='Välj din vaccinationsgrupp'/>
+        <ListItemText primary='Vi kunde tyvärr inte hitta några lediga tider enligt angivna sökpreferenser'/>
       </ListItem>
-          <ListItem button>
-            <ListItemText primary='TEST'/>
-          </ListItem>
           <Divider variant='inset' component='li' />
     </List>
+    :
+    <List component='nav' aria-label='main mailbox folders'>
+      {availableTimes.map((time, index) => {
+        return (
+          <ListItem key={index + 'list'}>
+            <ListItemText key={index} primary={time}/>
+          </ListItem>
+        )
+      })}
+        <Divider variant='inset' component='li' />
+  </List>
   )
 }
 
