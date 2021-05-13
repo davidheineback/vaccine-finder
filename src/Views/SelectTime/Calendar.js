@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Calendar({ from }) {
+function Calendar({ from, onChange }) {
   const classes = useStyles();
   return (
-    <form className={classes.container} noValidate>
+    <form onChange={onChange} className={classes.container} noValidate>
       <TextField
         id="date"
         label={from ? 'från' : 'till'}
@@ -30,7 +30,7 @@ function Calendar({ from }) {
         }}
       />
     </form>
-  );
+  )
 }
 
 export default Calendar
