@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
 import { Loader } from '../../Utilities/Loader/Loader'
+import { StyledBackArrow } from '../../Utilities/BackArrow/BackArrowStyles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -15,20 +16,19 @@ function SelectTime() {
   const [availableTimes, setAvailableTime] = useState()
   console.log(appointmentData)
 
-
-
   useEffect(() => {
     async function handleSearchNext() {
-      const data = appointmentData.map(async (appointment) => {
+      const data = appointmentData?.map(async (appointment) => {
         if (appointment.response.length > 0) {
           const response = await API.getAvailableTimes(appointment, fromDate, toDate)
           return response
         }
       })
+      if (data){
       const newData = await Promise.all(data)
       setAvailableTime(newData.filter(filter => filter.length > 0))
       console.log(newData)
-      setIsLoading(false)
+      setIsLoading(false)}
     }
 
     handleSearchNext()
@@ -41,15 +41,20 @@ function SelectTime() {
   return (
     isLoading ? <Loader/>
     : availableTimes.length < 1 ?
+    <>
+    <StyledBackArrow/>
     <List component='nav' aria-label='main mailbox folders'>
       <ListItem>
         <ListItemText primary='Vi kunde tyvärr inte hitta några lediga tider enligt angivna sökpreferenser'/>
       </ListItem>
           <Divider variant='inset' component='li' />
     </List>
+    </>
     :
+    <>
+    <StyledBackArrow/>
     <List component='nav' aria-label='main mailbox folders'>
-      {availableTimes.map((time, index) => {
+      {availableTimes?.map((time, index) => {
         return (
           <ListItem key={index + 'list'}>
             <ListItemText key={index} primary={time}/>
@@ -58,6 +63,7 @@ function SelectTime() {
       })}
         <Divider variant='inset' component='li' />
   </List>
+  </>
   )
 }
 

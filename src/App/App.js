@@ -5,7 +5,7 @@ import GlobalState from '../GlobalState/GlobalState'
 import Cliniques from '../Views/Cliniques/Cliniques'
 import StartView from '../Views/StartView/StartView'
 // import SearchView from '../Views/SearchView/SearchView'
-import SearchStrategy from '../Views/SelectTime/SelectTimeStrategy'
+import SelectTimeStrategy from '../Views/SelectTime/SelectTimeStrategy'
 import SelectTime from '../Views/SelectTime/SelectTime'
 import SelectAppointment from '../Views/SelectAppointment/SelectAppointment'
 import AppContainer from '../Views/AppContainer/AppContainer'
@@ -23,7 +23,7 @@ function App() {
               <Route path='/' exact  component={StartView} />
               {/* <Route path='/' exact  component={SearchView} /> */}
               <Route path='/mottagningar' exact component={Cliniques} />
-              <Route path='/sok-metod' exact component={SearchStrategy} />
+              <Route path='/sok-metod' exact component={SelectTimeStrategy} />
               <Route path='/lediga-tider' exact component={SelectTime} />
               <Route path='/vaccinations-grupp' exact component={SelectAppointment} />
             </Switch>
