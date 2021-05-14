@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
+import { StyledBackArrow } from '../../Utilities/BackArrow/BackArrowStyles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -34,6 +35,8 @@ function SelectTimeStrategy() {
   if (!appointmentData) return <Redirect to='./'/>
   if (redirect) return <Redirect to='/lediga-tider'/>
   return (
+    <>
+    <StyledBackArrow/>
     <List component='nav' aria-label='main mailbox folders'>
       {!timeSelector ? 
         <>
@@ -51,10 +54,9 @@ function SelectTimeStrategy() {
         <Calendar onChange={handleTo} to/>
         <ListItem button onClick={() => {setRedirect(true)}}>Sök mellan valda datum</ListItem>
         </>
-      )}
-          
+      )}    
     </List>
-
+  </>
   )
 }
 

@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 import * as API from '../../App/fetch.js'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
 import { Loader } from '../../Utilities/Loader/Loader'
+import { StyledBackArrow } from '../../Utilities/BackArrow/BackArrowStyles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -56,6 +57,8 @@ function Cliniques() {
   return isLoading ? (
     <Loader />
   ) : (
+    <>
+    <StyledBackArrow/>
     <List component='nav' aria-label='main mailbox folders'>
       {cities.map((city, index) => (
         <div key={index}>
@@ -66,6 +69,7 @@ function Cliniques() {
         </div>
       ))}
     </List>
+    </>
   )
 }
 
