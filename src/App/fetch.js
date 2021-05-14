@@ -12,7 +12,6 @@ export async function getCliniques (setCliniques, county) {
 }
 
 export async function getAppointmentTypes (station) {
-  console.log(station)
   try {
     const categories = await fetch(`https://booking-api.mittvaccin.se/clinique/${station}/appointmentTypes`)
     const response = await categories.json()
