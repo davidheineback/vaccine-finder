@@ -14,6 +14,7 @@ function Cliniques() {
   const [cities, setCities] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [appointmentDataReady, setAppointmentDataReady] = useState(false)
+  const [tempCliniqueContainer, setTempCliniqueContainer] = useState()
 
   useEffect(() => {
     cityFunction()
@@ -37,6 +38,7 @@ function Cliniques() {
       index === filter.length - 1 && setIsLoading(false)
       if (newData.length > 0) {
         if (newData[0].response.length > 0) {
+          setTempCliniqueContainer(prev => prev ? [...prev, {city, data: newData}] : [{city, data: newData}])
           setCities(prev => [...prev, city])
         } else {
           setCities(prev => [...prev])
@@ -54,24 +56,14 @@ function Cliniques() {
 
 
   async function handleCity({ target }) {
-    const stationIds = cliniques
-      .filter(
-        (clinique) => clinique.booking_auto_search && (clinique.name.toLowerCase().includes(target.textContent.toLowerCase()) || clinique.city.toLowerCase().includes(target.textContent.toLowerCase()))
-      )
-      .map((clinique) => clinique.id)
-    const data = stationIds.map(async (id) => {
-      const response = await API.getAppointmentTypes(id)
-      return { id, response }
-    })
-    const newData = await Promise.all(data)
-    console.log(newData)
-    setAppointmentData(newData)
+    const data = tempCliniqueContainer.filter(city => city.city.toLowerCase() === target.textContent.toLowerCase())
+    const mapData = data.map(data => data.data)
+    setAppointmentData(mapData)
     setAppointmentDataReady(true)
   }
 
   if (!county) return <Redirect to='./' />
   if (appointmentDataReady) return <Redirect to='./sok-metod'/>
-  // if (appointmentDataReady) return <Redirect to='./appointment'/>
   return isLoading ? (
     <Loader />
   ) : (
