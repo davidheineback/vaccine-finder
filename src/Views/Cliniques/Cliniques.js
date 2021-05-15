@@ -4,6 +4,8 @@ import * as API from '../../App/fetch.js'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
 import { Loader } from '../../Utilities/Loader/Loader'
 import { StyledBackArrow } from '../../Utilities/BackArrow/BackArrowStyles'
+import  Button from '../../Utilities/Button/Button'
+import { StyledBorderHeartIcon, StyledFilledHeartIcon } from './CliniqueStyles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -15,6 +17,7 @@ function Cliniques() {
   const [isLoading, setIsLoading] = useState(true)
   const [appointmentDataReady, setAppointmentDataReady] = useState(false)
   const [tempCliniqueContainer, setTempCliniqueContainer] = useState()
+  const [multiSelect, setMultiSelect] = useState([])
 
   useEffect(() => {
     cityFunction()
@@ -57,9 +60,17 @@ function Cliniques() {
 
   async function handleCity({ target }) {
     const data = tempCliniqueContainer.filter(city => city.city.toLowerCase() === target.textContent.toLowerCase())
-    const mapData = data.map(data => data.data)
-    setAppointmentData(mapData)
-    setAppointmentDataReady(true)
+    if (multiSelect.includes(data[0].city)) {
+      setMultiSelect(multiSelect.filter(city => city !== data[0].city))
+      const tempRemoveIds = data.map(city => city.data[0].id)
+      setAppointmentData(prev => [...prev]?.filter(id => tempRemoveIds.includes(id)))
+    } else {
+      setMultiSelect(prev => prev ? [...prev, data[0].city] : [data[0].city])
+      const mapData = data.map(data => data.data)
+      setAppointmentData(prev => prev ? [...prev, mapData] : [mapData])
+
+    }
+    
   }
 
   if (!county) return <Redirect to='./' />
@@ -73,11 +84,13 @@ function Cliniques() {
       {cities.map((city, index) => (
         <div key={index}>
           <ListItem button onClick={handleCity}>
+            {multiSelect.includes(city) ? <StyledFilledHeartIcon/> : <StyledBorderHeartIcon/>}
             <ListItemText primary={city} />
           </ListItem>
           <Divider variant='inset' component='li' />
         </div>
       ))}
+      <Button btnType='primary' onClick={() => {multiSelect.length > 0 && setAppointmentDataReady(true)}}>Sök lediga tider</Button>
     </List>
     </>
   )
