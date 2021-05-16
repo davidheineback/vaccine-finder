@@ -17,7 +17,7 @@ function SelectTime() {
 
   useEffect(() => {
     async function handleSearchNext() {
-      const data = appointmentData[0]?.map(async (appointment) => {
+      const data = appointmentData?.[0]?.map(async (appointment) => {
         const response = await appointment.map(async (id) => {
           if (id.response.length > 0) {
             const response = await API.getAvailableTimes(id, fromDate, toDate)
