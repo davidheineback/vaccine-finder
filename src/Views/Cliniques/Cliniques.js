@@ -26,8 +26,8 @@ function Cliniques() {
       if (cliniques.length > 0) {
         const cityArray = cliniques.map((clinique) => clinique.city)
         const filter = [...new Set(cityArray)].filter((city) => city.length > 0).sort()
-      
     filter.map(async (city, index) => {
+
         const stationIds = cliniques
         .filter(
           (clinique) => clinique.booking_auto_search && (clinique.name.toLowerCase().includes(city.toLowerCase()) || clinique.city.toLowerCase().includes(city.toLowerCase()))
@@ -60,7 +60,7 @@ function Cliniques() {
 
   async function handleCity({ target }) {
     const data = tempCliniqueContainer.filter(city => city.city.toLowerCase() === target.textContent.toLowerCase())
-    if (multiSelect.includes(data[0].city)) {
+    if (multiSelect.includes(data?.[0].city)) {
       setMultiSelect(multiSelect.filter(city => city !== data[0].city))
       const tempRemoveIds = data.map(city => city.data[0].id)
       setAppointmentData(prev => [...prev]?.filter(id => tempRemoveIds.includes(id)))

@@ -4,6 +4,7 @@ export async function getCliniques (setCliniques, county) {
   try {
     const categories = await fetch('https://booking-api.mittvaccin.se/clinique/')
     const response = await categories.json()
+    console.log(response)
     const filteredResponse = response.filter(clinique => clinique.style.toLowerCase().includes(county.toLowerCase()))
     setCliniques(filteredResponse)
   } catch (error) {
