@@ -11,38 +11,49 @@ import * as API from '../../App/fetch'
 
 
 function SelectTime() {
-  const { appointmentData, searchStrategy, fromDate, toDate } = React.useContext(GlobalStateContext)
+  const { cliniques, appointmentData, fromDate, toDate } = React.useContext(GlobalStateContext)
   const [isLoading, setIsLoading] = useState(true)
-  const [availableTimes, setAvailableTime] = useState()
+  const [availableTimes, setAvailableTime] = useState([])
 
   useEffect(() => {
     async function handleSearchNext() {
-      const data = appointmentData?.[0]?.map(async (appointment) => {
-        const response = await appointment.map(async (id) => {
-          if (id.response.length > 0) {
-            const response = await API.getAvailableTimes(id, fromDate, toDate)
-            return response
-          }
-        })
+      const data = appointmentData?.map(async (appointment) => {
+        console.log(appointment)
+        const response  = await API.getAvailableTimes(appointment, fromDate, toDate)
         const newData = await Promise.all(response)
-        return newData
+        return {id: appointment.id, slots: newData}
       })
       if (data){
       const newData = await Promise.all(data)
-      setAvailableTime(newData[0].filter(filter => filter.length > 0))
+      const arr = newData.map((clinique) => {
+        console.log(clinique)
+        const available = clinique.slots.map(date => {
+          const filter = date.slots.filter(slot => slot.available)
+          return filter.length > 0 && filter
+        })
+        const newArr = available.filter(truthy => truthy !== false)
+        clinique.slots = newArr
+        return clinique
+      })
+      
+      arr.forEach(id => {
+        if (id.slots.length > 0) {
+          setAvailableTime(prev => prev ? [...prev, id] : [id])
+        }
+      })
       setIsLoading(false)}
     }
 
     handleSearchNext()
 
-  },[searchStrategy, appointmentData, fromDate, toDate ])
+  },[appointmentData, fromDate, toDate ])
 
-  
 
   if (!appointmentData) return <Redirect to='./' />
   return (
+    console.log(availableTimes) &&
     isLoading ? <Loader/>
-    : availableTimes.length < 1 ?
+    : availableTimes?.length < 1 ?
     <>
     <StyledBackArrow/>
     <List component='nav' aria-label='main mailbox folders'>
@@ -55,7 +66,35 @@ function SelectTime() {
     :
     <>
     <StyledBackArrow/>
-    <List component='nav' aria-label='main mailbox folders'>
+    {availableTimes.map((clinique, index) => { 
+      const id = clinique.id
+      const name = cliniques.filter((clinique) => clinique.id === id)
+
+      return (
+        clinique.slots.map(slot => {
+          return (slot.map((timeslot, index) => {
+            console.log(timeslot.when)
+            return (
+              index === 0 ?
+              <>
+              <ListItem key={index + 'list'}>
+                <ListItemText key={index} primary={name[0].name}/>
+                </ListItem>
+            <ListItem key={index + 'item'}>
+              <ListItemText key={index} primary={timeslot.when}/>
+            </ListItem>
+            </>
+            :
+            <ListItem key={index + 'item'}>
+            <ListItemText key={index} primary={timeslot.when}/>
+          </ListItem>
+            )
+          })
+          )
+              })
+    )
+    })}
+    {/* <List component='nav' aria-label='main mailbox folders'>
       {availableTimes?.map((time, index) => {
         return (
           <ListItem key={index + 'list'}>
@@ -64,7 +103,7 @@ function SelectTime() {
         )
       })}
         <Divider variant='inset' component='li' />
-  </List>
+    </List> */}
   </>
   )
 }
