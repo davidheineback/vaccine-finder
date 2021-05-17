@@ -60,7 +60,7 @@ function StartView() {
         </div>
         ))}
     </div>
-  );
+  )
 }
 
 export default StartView
