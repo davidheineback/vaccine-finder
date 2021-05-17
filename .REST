@@ -1,4 +1,4 @@
-GET https://booking-api.mittvaccin.se/clinique/507/appointments/14644/slots/210510-210517
+GET https://booking-api.mittvaccin.se/clinique/1546/appointments/14644/slots/210510-210517
 
 ###
 
@@ -6,4 +6,8 @@ GET https://booking-api.mittvaccin.se/clinique/
 
 ### 
 
-GET https://booking-api.mittvaccin.se/clinique/507/appointmentTypes
+GET https://booking-api.mittvaccin.se/clinique/1546/appointmentTypes
+
+###
+
+GET https://booking-api.mittvaccin.se/clinique/1546/appointments/14879/slots/210517-210617
