@@ -9,7 +9,7 @@ export default function GlobalState({ children }) {
   const [appointmentData, setAppointmentData] = useState()
   const [cliniques, setCliniques] = useState([])
   const [fromDate, setFromDate] = useState(moment().format("YYMMDD"))
-  const [toDate, setToDate] = useState(moment().add(3, 'days').format("YYMMDD"))
+  const [toDate, setToDate] = useState(moment().add(30, 'days').format("YYMMDD"))
  
   const state = {
     county,

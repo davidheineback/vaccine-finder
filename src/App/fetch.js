@@ -26,7 +26,9 @@ export async function getAvailableTimes(station, dateFrom, dateTo) {
   const allTimes = await fetch(`https://booking-api.mittvaccin.se/clinique/${station.id}/appointments/${station.response[0].id}/slots/${dateFrom}-${dateTo}`)
   const response = await allTimes.json()
   console.log(response)
-  const available = response.filter(date => date.slots.available)
+  const available = response.map(date => {
+    return date.slots.filter(available => available.available)
+  })
   console.log(available)
   return available
 }
