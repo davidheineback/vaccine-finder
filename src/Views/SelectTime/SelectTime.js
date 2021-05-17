@@ -11,9 +11,9 @@ import * as API from '../../App/fetch'
 
 
 function SelectTime() {
-  const { appointmentData, fromDate, toDate } = React.useContext(GlobalStateContext)
+  const { cliniques, appointmentData, fromDate, toDate } = React.useContext(GlobalStateContext)
   const [isLoading, setIsLoading] = useState(true)
-  const [availableTimes, setAvailableTime] = useState()
+  const [availableTimes, setAvailableTime] = useState([])
 
   useEffect(() => {
     async function handleSearchNext() {
@@ -25,21 +25,22 @@ function SelectTime() {
       })
       if (data){
       const newData = await Promise.all(data)
-      // newData[0].slots = newData[0].slots.filter(date => date.slots.length > 0)
       const arr = newData.map((clinique) => {
         console.log(clinique)
         const available = clinique.slots.map(date => {
           const filter = date.slots.filter(slot => slot.available)
-          console.log(filter)
           return filter.length > 0 && filter
         })
         const newArr = available.filter(truthy => truthy !== false)
         clinique.slots = newArr
         return clinique
       })
-      console.log(arr)
-      setAvailableTime(prev => prev ? [...prev, arr] : [arr])
       
+      arr.forEach(id => {
+        if (id.slots.length > 0) {
+          setAvailableTime(prev => prev ? [...prev, id] : [id])
+        }
+      })
       setIsLoading(false)}
     }
 
@@ -47,13 +48,12 @@ function SelectTime() {
 
   },[appointmentData, fromDate, toDate ])
 
-  
 
   if (!appointmentData) return <Redirect to='./' />
   return (
     console.log(availableTimes) &&
     isLoading ? <Loader/>
-    : availableTimes?.[0].length < 1 ?
+    : availableTimes?.length < 1 ?
     <>
     <StyledBackArrow/>
     <List component='nav' aria-label='main mailbox folders'>
@@ -66,7 +66,34 @@ function SelectTime() {
     :
     <>
     <StyledBackArrow/>
-    {console.log(availableTimes)}
+    {availableTimes.map((clinique, index) => { 
+      const id = clinique.id
+      const name = cliniques.filter((clinique) => clinique.id === id)
+
+      return (
+        clinique.slots.map(slot => {
+          return (slot.map((timeslot, index) => {
+            console.log(timeslot.when)
+            return (
+              index === 0 ?
+              <>
+              <ListItem key={index + 'list'}>
+                <ListItemText key={index} primary={name[0].name}/>
+                </ListItem>
+            <ListItem key={index + 'item'}>
+              <ListItemText key={index} primary={timeslot.when}/>
+            </ListItem>
+            </>
+            :
+            <ListItem key={index + 'item'}>
+            <ListItemText key={index} primary={timeslot.when}/>
+          </ListItem>
+            )
+          })
+          )
+              })
+    )
+    })}
     {/* <List component='nav' aria-label='main mailbox folders'>
       {availableTimes?.map((time, index) => {
         return (
@@ -76,7 +103,7 @@ function SelectTime() {
         )
       })}
         <Divider variant='inset' component='li' />
-  </List> */}
+    </List> */}
   </>
   )
 }
