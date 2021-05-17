@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -16,9 +16,8 @@ function StartView() {
   const { setCliniques, setCounty, redirect, setRedirect } = React.useContext(
     GlobalStateContext
   )
-
-const countyList = regions.filter(region => region.method === 'search')
-const otherCountys = regions.filter(region => region.method === 'redirect')  
+  const [countyList] = useState(regions.filter(region => region.method === 'search'))
+  const [otherCountys] = useState(regions.filter(region => region.method === 'redirect'))
 
 
   const handleClick = async (searchString) => {
