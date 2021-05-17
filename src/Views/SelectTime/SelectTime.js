@@ -18,18 +18,16 @@ function SelectTime() {
   useEffect(() => {
     async function handleSearchNext() {
       const data = appointmentData?.map(async (appointment) => {
-        console.log(appointment)
         const response  = await API.getAvailableTimes(appointment, fromDate, toDate)
         const newData = await Promise.all(response)
         return {id: appointment.id, slots: newData}
       })
       if (data){
       const newData = await Promise.all(data)
-      const arr = newData.map((clinique) => {
-        console.log(clinique)
+      const arr = newData.map((clinique, index) => {
         const available = clinique.slots.map(date => {
           const filter = date.slots.filter(slot => slot.available)
-          return filter.length > 0 && filter
+          return filter.length > 0 && {date: date.date, slots: filter}
         })
         const newArr = available.filter(truthy => truthy !== false)
         clinique.slots = newArr
@@ -67,26 +65,29 @@ function SelectTime() {
     <>
     <StyledBackArrow/>
     {availableTimes.map((clinique, index) => { 
+      console.log(clinique)
       const id = clinique.id
       const name = cliniques.filter((clinique) => clinique.id === id)
-
+      console.log(name)
       return (
         clinique.slots.map(slot => {
-          return (slot.map((timeslot, index) => {
-            console.log(timeslot.when)
+          console.log(slot)
+          return (slot.slots.map((timeslot, index) => {
             return (
               index === 0 ?
               <>
               <ListItem key={index + 'list'}>
                 <ListItemText key={index} primary={name[0].name}/>
                 </ListItem>
-            <ListItem key={index + 'item'}>
-              <ListItemText key={index} primary={timeslot.when}/>
+            <ListItem key={index + 'first item'}>
+            <ListItemText key={index + 'first date'} primary={slot.date}/>
+              <ListItemText key={index + 'first time'} primary={timeslot.when}/>
             </ListItem>
             </>
             :
             <ListItem key={index + 'item'}>
-            <ListItemText key={index} primary={timeslot.when}/>
+            <ListItemText key={index + 'date'} primary={slot.date}/>
+            <ListItemText key={index + 'time'} primary={`${timeslot.when}`}/>
           </ListItem>
             )
           })
