@@ -49,7 +49,6 @@ function SelectTime() {
 
   if (!appointmentData) return <Redirect to='./' />
   return (
-    console.log(availableTimes) &&
     isLoading ? <Loader/>
     : availableTimes?.length < 1 ?
     <>
@@ -71,7 +70,6 @@ function SelectTime() {
     {availableTimes.map((clinique, index) => { 
       const id = clinique.id
       const name = cliniques.filter((clinique) => clinique.id === id)
-      console.log(name)
       return (
         clinique.slots.map(slot => {
           const date = `20${slot.date.substring(0, 2)}-${slot.date.substring(2,4)}-${slot.date.substring(4)}`
