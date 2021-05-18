@@ -12,7 +12,6 @@ import SelectAppointment from '../Views/SelectAppointment/SelectAppointment'
 import AppContainer from '../Views/AppContainer/AppContainer'
 import Wrapper from '../Components/Wrapper/Wrapper'
 
-// REGION HALLAND // REGION VÄSTERNORRLAND // REGION KALMAR LÄN // REGION ÖSTERGÖTLAND
 
 function App() {
   return (
