@@ -11,7 +11,7 @@ import * as API from '../../App/fetch'
 
 
 function SelectTime() {
-  const { cliniques, appointmentData, fromDate, toDate, setRedirect } = React.useContext(GlobalStateContext)
+  const { cliniques, appointmentData, fromDate, toDate } = React.useContext(GlobalStateContext)
   const [isLoading, setIsLoading] = useState(true)
   const [availableTimes, setAvailableTime] = useState([])
 
