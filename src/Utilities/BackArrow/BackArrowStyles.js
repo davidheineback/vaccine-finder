@@ -7,4 +7,8 @@ export const StyledBackArrow = styled(KeyboardBackspaceRoundedIcon)`
   left: 40px;
   color: rgba(240, 52, 52, 0.7);
   cursor: pointer;
+  @media (max-width: 768px) {
+  top: 30px;
+  left: 50px;
+  }
 `
