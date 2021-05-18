@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
 import { StyledBackArrow } from '../../Utilities/BackArrow/BackArrowStyles'
 import List from '@material-ui/core/List'
@@ -36,7 +36,9 @@ function SelectTimeStrategy() {
   if (redirect) return <Redirect to='/lediga-tider'/>
   return (
     <>
-    <StyledBackArrow/>
+      <Link to='/mottagningar'>
+      <StyledBackArrow/>
+      </Link>
     <List component='nav' aria-label='main mailbox folders'>
       {!timeSelector ? 
         <>

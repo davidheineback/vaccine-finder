@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
 import { Loader } from '../../Utilities/Loader/Loader'
 import { StyledBackArrow } from '../../Utilities/BackArrow/BackArrowStyles'
@@ -53,7 +53,9 @@ function SelectTime() {
     isLoading ? <Loader/>
     : availableTimes?.length < 1 ?
     <>
-    <StyledBackArrow/>
+    <Link to='/sok-metod'>
+      <StyledBackArrow/>
+    </Link>
     <List component='nav' aria-label='main mailbox folders'>
       <ListItem>
         <ListItemText primary='Vi kunde tyvärr inte hitta några lediga tider enligt angivna sökpreferenser'/>
@@ -63,48 +65,43 @@ function SelectTime() {
     </>
     :
     <>
-    <StyledBackArrow/>
+    <Link to='/sok-metod'>
+      <StyledBackArrow/>
+    </Link>
     {availableTimes.map((clinique, index) => { 
-      console.log(clinique)
       const id = clinique.id
       const name = cliniques.filter((clinique) => clinique.id === id)
       console.log(name)
       return (
         clinique.slots.map(slot => {
-          console.log(slot)
-          return (slot.slots.map((timeslot, index) => {
-            return (
-              index === 0 ?
-              <>
-              <ListItem key={index + 'list'}>
-                <ListItemText key={index} primary={name[0].name}/>
-                </ListItem>
-            <ListItem key={index + 'first item'}>
-            <ListItemText key={index + 'first date'} primary={slot.date}/>
-              <ListItemText key={index + 'first time'} primary={timeslot.when}/>
+          const date = `20${slot.date.substring(0, 2)}-${slot.date.substring(2,4)}-${slot.date.substring(4)}`
+            return(
+            index === 0 ?
+            <>
+            <ListItem key={index + 'list'}>
+              <ListItemText key={index} primary={name[0].name}/>
+            </ListItem>
+            <ListItem key={index + 'headerplaceholder'}>
+            <ListItemText key={index + 'datumplaceholder'} primary='Datum:'/>
+            <ListItemText key={index + 'numberofTimes'} primary='Antal lediga tider'/>
+            </ListItem>
+            <ListItem component="a" href={`https://bokning.mittvaccin.se/klinik/${id}/bokning`} target='_blank' key={index + 'item'}>
+            <ListItemText key={index + 'datumplaceholder'} primary={date}/>
+            <ListItemText key={index + 'times'} primary={slot.slots.length}/>
             </ListItem>
             </>
             :
+            <>
             <ListItem key={index + 'item'}>
-            <ListItemText key={index + 'date'} primary={slot.date}/>
-            <ListItemText key={index + 'time'} primary={`${timeslot.when}`}/>
-          </ListItem>
+              <ListItemText key={index + 'date'} primary={date}/>
+              <ListItemText key={index + 'times'} primary={slot.slots.length}/>
+              <ListItemText key={index + 'times'} primary='Till bokning'/>
+            </ListItem>
+           </>
             )
-          })
-          )
               })
-    )
+              )
     })}
-    {/* <List component='nav' aria-label='main mailbox folders'>
-      {availableTimes?.map((time, index) => {
-        return (
-          <ListItem key={index + 'list'}>
-            <ListItemText key={index} primary={time}/>
-          </ListItem>
-        )
-      })}
-        <Divider variant='inset' component='li' />
-    </List> */}
   </>
   )
 }

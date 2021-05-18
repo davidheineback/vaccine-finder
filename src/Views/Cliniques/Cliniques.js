@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import * as API from '../../App/fetch.js'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
 import { Loader } from '../../Utilities/Loader/Loader'
@@ -10,7 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 
 function Cliniques() {
-  const { cliniques, county, setAppointmentData } = React.useContext(GlobalStateContext)
+  const { cliniques, county, setAppointmentData, setRedirect } = React.useContext(GlobalStateContext)
   const [cities, setCities] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [appointmentDataReady, setAppointmentDataReady] = useState(false)
@@ -57,7 +57,9 @@ function Cliniques() {
     <Loader />
   ) : (
     <>
-    <StyledBackArrow/>
+      <Link to='/' onClick={() => setRedirect(false)}>
+      <StyledBackArrow/>
+      </Link>
     <List component='nav' aria-label='main mailbox folders'>
       {cities.map((city, index) => (
         <div key={index}>

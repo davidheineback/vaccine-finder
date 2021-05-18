@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -10,9 +10,8 @@ import * as API from '../../App/fetch';
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
 import { regions } from './regions.js'
 
- 
-
 function StartView() {
+
   const { setCliniques, setCounty, redirect, setRedirect } = React.useContext(
     GlobalStateContext
   )
@@ -30,7 +29,7 @@ function StartView() {
   return (
     <div >
       <List component="nav" aria-label="tillgängliga regioner">
-        <ListItem>
+        <ListItem style={{ textAlign: 'center' }}>
           <ListItemText primary='Välj region för att söka efter ledig tid' />
         </ListItem>
         {countyList.map((item, index)=>(
@@ -45,7 +44,7 @@ function StartView() {
         </div>
         ))}
       <ListItem>
-        <ListItemText primary='Följande regioner hanteras tyvärr ännu inte av hittavaccintid.se. Välj region för att bli omdirigread till bokningsinformation på 1177 för just din region' />
+        <ListItemText secondary='Följande regioner hanteras tyvärr ännu inte av hittavaccintid.se. Välj region för att bli omdirigread till bokningsinformation på 1177 för just din region'/>
       </ListItem>
       </List>
       {otherCountys.map((item, index)=>(
@@ -54,11 +53,14 @@ function StartView() {
           <ListItemIcon>
             <ChevronRightIcon />
           </ListItemIcon>
-          <ListItemText primary={item.county}/>
+          <ListItemText secondary={item.county}/>
         </ListItem>
         <Divider />
         </div>
         ))}
+      <Link to='/om' style={{ textDecoration: 'none' }}>
+        <ListItemText style={{ textTransform: 'uppercase', color: 'black' , marginTop: '15px'}}>Om hittavaccintid.se</ListItemText>
+      </Link>
     </div>
   )
 }
