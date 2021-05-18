@@ -8,8 +8,6 @@ import Divider from '@material-ui/core/Divider'
 
 function SelectAppointment() {
   const { appointmentData } = React.useContext(GlobalStateContext)
-  console.log(appointmentData)
-
   if (!appointmentData) return <Redirect to='./' />
   return (
     <List component='nav' aria-label='main mailbox folders'>
