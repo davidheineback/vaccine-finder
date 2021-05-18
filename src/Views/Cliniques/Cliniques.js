@@ -32,7 +32,6 @@ function Cliniques() {
 
 
   async function handleCity({ target }) {
-      console.log(target.textContent)
         const city = target.textContent.toLowerCase()
         const stationIds = cliniques
         .filter(
@@ -46,7 +45,6 @@ function Cliniques() {
             })
             
         const newData = await Promise.all(data)
-        console.log(newData)
         setAppointmentData(newData)
         setAppointmentDataReady(true)
   }
