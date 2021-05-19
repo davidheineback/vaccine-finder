@@ -47,12 +47,12 @@ function SelectTime() {
   },[appointmentData, fromDate, toDate ])
 
 
-  if (!appointmentData) return <Redirect to='./' />
+  if (!appointmentData) return <Redirect to='/' />
   return (
     isLoading ? <Loader/>
     : availableTimes?.length < 1 ?
     <>
-    <Link to='/sok-metod'>
+    <Link to='./sok-metod'>
       <StyledBackArrow/>
     </Link>
     <List component='nav' aria-label='main mailbox folders'>
@@ -64,7 +64,7 @@ function SelectTime() {
     </>
     :
     <>
-    <Link to='/sok-metod'>
+    <Link to='./sok-metod'>
       <StyledBackArrow/>
     </Link>
     {availableTimes.map((clinique, index) => { 
@@ -75,25 +75,24 @@ function SelectTime() {
           const date = `20${slot.date.substring(0, 2)}-${slot.date.substring(2,4)}-${slot.date.substring(4)}`
             return(
             index === 0 ?
-            <>
+            <div key={index}>
             <ListItem key={index + 'list'}>
               <ListItemText key={index} primary={name[0].name}/>
             </ListItem>
             <ListItem key={index + 'headerplaceholder'}>
-            <ListItemText key={index + 'datumplaceholder'} primary='Datum:'/>
+            <ListItemText key={index + 'dateplaceholder'} primary='Datum:'/>
             <ListItemText key={index + 'numberofTimes'} primary='Antal lediga tider'/>
             </ListItem>
             <ListItem component="a" href={`https://bokning.mittvaccin.se/klinik/${id}/bokning`} target='_blank' key={index + 'item'}>
-            <ListItemText key={index + 'datumplaceholder'} primary={date}/>
+            <ListItemText key={index + 'dateplaceholder'} primary={date}/>
             <ListItemText key={index + 'times'} primary={slot.slots.length}/>
             </ListItem>
-            </>
+            </div>
             :
             <>
-            <ListItem key={index + 'item'}>
-              <ListItemText key={index + 'date'} primary={date}/>
-              <ListItemText key={index + 'times'} primary={slot.slots.length}/>
-              <ListItemText key={index + 'times'} primary='Till bokning'/>
+            <ListItem component="a" href={`https://bokning.mittvaccin.se/klinik/${id}/bokning`} target='_blank' key={index + 'item2'}>
+            <ListItemText key={index + 'dateplaceholder2'} primary={date}/>
+            <ListItemText key={index + 'times2'} primary={slot.slots.length}/>
             </ListItem>
            </>
             )

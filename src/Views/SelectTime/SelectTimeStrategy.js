@@ -11,7 +11,7 @@ import moment from 'moment'
 
 
 function SelectTimeStrategy() {
-  const { appointmentData, fromDate, setFromDate, setToDate } = React.useContext(GlobalStateContext)
+  const { county, citySlug, appointmentData, fromDate, setFromDate, setToDate } = React.useContext(GlobalStateContext)
   const [redirect, setRedirect] = useState(false)
   const [timeSelector, setTimeSelector] = useState(false)
 
@@ -32,8 +32,8 @@ function SelectTimeStrategy() {
   }
 
 
-  if (!appointmentData) return <Redirect to='./'/>
-  if (redirect) return <Redirect push to='/lediga-tider'/>
+  if (!appointmentData) return <Redirect to='/'/>
+  if (redirect) return <Redirect to={`/${county}/${citySlug}/lediga-tider`}/>
   return (
     <>
       <Link to='/mottagningar'>
