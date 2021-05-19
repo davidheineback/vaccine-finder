@@ -33,7 +33,7 @@ function SelectTimeStrategy() {
 
 
   if (!appointmentData) return <Redirect to='./'/>
-  if (redirect) return <Redirect to='/lediga-tider'/>
+  if (redirect) return <Redirect push to='/lediga-tider'/>
   return (
     <>
       <Link to='/mottagningar'>

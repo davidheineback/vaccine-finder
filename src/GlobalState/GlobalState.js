@@ -5,6 +5,7 @@ export const GlobalStateContext = React.createContext(null)
 
 export default function GlobalState({ children }) {
   const [county, setCounty] = useState()
+  const [citySlug, setCitySlug] = useState()
   const [redirect, setRedirect] = useState(false)
   const [appointmentData, setAppointmentData] = useState()
   const [cliniques, setCliniques] = useState([])
@@ -23,7 +24,9 @@ export default function GlobalState({ children }) {
     fromDate,
     setFromDate,
     toDate,
-    setToDate
+    setToDate,
+    citySlug,
+    setCitySlug
   }
 
   return (
