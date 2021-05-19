@@ -50,7 +50,7 @@ function Cliniques() {
   }
 
   if (!county) return <Redirect to='./' />
-  if (appointmentDataReady) return <Redirect to='./sok-metod'/>
+  if (appointmentDataReady) return <Redirect push to='/sok-metod'/>
   return isLoading ? (
     <Loader />
   ) : (

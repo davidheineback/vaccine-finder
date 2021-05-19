@@ -4,6 +4,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import GlobalState from '../GlobalState/GlobalState'
 import Cliniques from '../Views/Cliniques/Cliniques'
 import StartView from '../Views/StartView/StartView'
+import RedirectToStart from '../Views/StartView/RedirectToStart'
 import About from '../Views/About/About'
 // import SearchView from '../Views/SearchView/SearchView'
 import SelectTimeStrategy from '../Views/SelectTime/SelectTimeStrategy'
@@ -27,6 +28,7 @@ function App() {
               <Route path='/lediga-tider' exact component={SelectTime} />
               <Route path='/vaccinations-grupp' exact component={SelectAppointment} />
               <Route path='/om' exact component={About} />
+              <Route path='*' component={RedirectToStart}/>
             </Switch>
           </Wrapper>
         </AppContainer>
