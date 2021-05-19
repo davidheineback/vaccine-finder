@@ -12,7 +12,7 @@ import { regions } from './regions.js'
 
 function StartView() {
 
-  const { setCliniques, setCounty, redirect, setRedirect } = React.useContext(
+  const { county, setCliniques, setCounty, redirect, setRedirect } = React.useContext(
     GlobalStateContext
   )
   const [countyList] = useState(regions.filter(region => region.method === 'search'))
@@ -25,7 +25,7 @@ function StartView() {
     setRedirect(true)
   }
 
-  if (redirect) return <Redirect to='/mottagningar'/>
+  if (redirect) return <Redirect to={`${county}/mottagningar`}/>
   return (
     <div >
       <List component="nav" aria-label="tillgängliga regioner">

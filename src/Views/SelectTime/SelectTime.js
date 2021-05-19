@@ -47,12 +47,12 @@ function SelectTime() {
   },[appointmentData, fromDate, toDate ])
 
 
-  if (!appointmentData) return <Redirect to='./' />
+  if (!appointmentData) return <Redirect to='/' />
   return (
     isLoading ? <Loader/>
     : availableTimes?.length < 1 ?
     <>
-    <Link to='/sok-metod'>
+    <Link to='./sok-metod'>
       <StyledBackArrow/>
     </Link>
     <List component='nav' aria-label='main mailbox folders'>
@@ -64,7 +64,7 @@ function SelectTime() {
     </>
     :
     <>
-    <Link to='/sok-metod'>
+    <Link to='./sok-metod'>
       <StyledBackArrow/>
     </Link>
     {availableTimes.map((clinique, index) => { 

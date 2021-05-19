@@ -10,7 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 
 function Cliniques() {
-  const { cliniques, county, setAppointmentData, setRedirect } = React.useContext(GlobalStateContext)
+  const { citySlug, setCitySlug, cliniques, county, setAppointmentData, setRedirect } = React.useContext(GlobalStateContext)
   const [cities, setCities] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [appointmentDataReady, setAppointmentDataReady] = useState(false)
@@ -33,6 +33,7 @@ function Cliniques() {
 
   async function handleCity({ target }) {
         const city = target.textContent.toLowerCase()
+        setCitySlug(target.textContent.toLowerCase())
         const stationIds = cliniques
         .filter(
           (clinique) => clinique.booking_auto_search && (clinique.name.toLowerCase().includes(city) || clinique.city.toLowerCase().includes(city))
@@ -49,8 +50,8 @@ function Cliniques() {
         setAppointmentDataReady(true)
   }
 
-  if (!county) return <Redirect to='./' />
-  if (appointmentDataReady) return <Redirect push to='/sok-metod'/>
+  if (!county) return <Redirect to='/' />
+  if (appointmentDataReady) return <Redirect to={`/${county}/${citySlug}/sok-metod`}/>
   return isLoading ? (
     <Loader />
   ) : (

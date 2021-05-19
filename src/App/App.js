@@ -9,7 +9,7 @@ import About from '../Views/About/About'
 // import SearchView from '../Views/SearchView/SearchView'
 import SelectTimeStrategy from '../Views/SelectTime/SelectTimeStrategy'
 import SelectTime from '../Views/SelectTime/SelectTime'
-import SelectAppointment from '../Views/SelectAppointment/SelectAppointment'
+// import SelectAppointment from '../Views/SelectAppointment/SelectAppointment'
 import AppContainer from '../Views/AppContainer/AppContainer'
 import Wrapper from '../Components/Wrapper/Wrapper'
 
@@ -23,10 +23,10 @@ function App() {
             <Switch>
               <Route path='/' exact  component={StartView} />
               {/* <Route path='/' exact  component={SearchView} /> */}
-              <Route path='/mottagningar' exact component={Cliniques} />
-              <Route path='/sok-metod' exact component={SelectTimeStrategy} />
-              <Route path='/lediga-tider' exact component={SelectTime} />
-              <Route path='/vaccinations-grupp' exact component={SelectAppointment} />
+              <Route path='/:region/mottagningar' exact component={Cliniques} />
+              <Route path='/:region/:ort/sok-metod' exact component={SelectTimeStrategy} />
+              <Route path='/:region/:ort/lediga-tider' exact component={SelectTime} />
+              {/* <Route path='/vaccinations-grupp' exact component={SelectAppointment} /> */}
               <Route path='/om' exact component={About} />
               <Route path='*' component={RedirectToStart}/>
             </Switch>
