@@ -22,8 +22,12 @@ export async function getAppointmentTypes (station) {
 }
 
 export async function getAvailableTimes(station, dateFrom, dateTo) {
-  const allTimes = await fetch(`https://booking-api.mittvaccin.se/clinique/${station.id}/appointments/${station.response[0].id}/slots/${dateFrom}-${dateTo}`)
-  const response = await allTimes.json()
-  const available = response.filter(date => date.slots.length > 0)
-  return available
+  if (station.response.length > 0) {
+    const allTimes = await fetch(`https://booking-api.mittvaccin.se/clinique/${station.id}/appointments/${station.response[0].id}/slots/${dateFrom}-${dateTo}`)
+    const response = await allTimes.json()
+    const available = response.filter(date => date.slots.length > 0)
+    return available
+  } else {
+    return []
+  }
 }

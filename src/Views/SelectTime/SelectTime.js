@@ -47,12 +47,12 @@ function SelectTime() {
   },[appointmentData, fromDate, toDate ])
 
 
-  if (!appointmentData) return <Redirect to='./' />
+  if (!appointmentData) return <Redirect to='/' />
   return (
     isLoading ? <Loader/>
     : availableTimes?.length < 1 ?
     <>
-    <Link to='/sok-metod'>
+    <Link to='./sok-metod'>
       <StyledBackArrow/>
     </Link>
     <List component='nav' aria-label='main mailbox folders'>
@@ -64,7 +64,7 @@ function SelectTime() {
     </>
     :
     <>
-    <Link to='/sok-metod'>
+    <Link to='./sok-metod'>
       <StyledBackArrow/>
     </Link>
     {availableTimes.map((clinique, index) => { 
@@ -80,20 +80,19 @@ function SelectTime() {
               <ListItemText key={index} primary={name[0].name}/>
             </ListItem>
             <ListItem key={index + 'headerplaceholder'}>
-            <ListItemText key={index + 'datumplaceholder'} primary='Datum:'/>
+            <ListItemText key={index + 'dateplaceholder'} primary='Datum:'/>
             <ListItemText key={index + 'numberofTimes'} primary='Antal lediga tider'/>
             </ListItem>
             <ListItem component="a" href={`https://bokning.mittvaccin.se/klinik/${id}/bokning`} target='_blank' key={index + 'item'}>
-            <ListItemText key={index + 'datumplaceholder'} primary={date}/>
+            <ListItemText key={index + 'dateplaceholder'} primary={date}/>
             <ListItemText key={index + 'times'} primary={slot.slots.length}/>
             </ListItem>
             </>
             :
             <>
-            <ListItem key={index + 'item'}>
-              <ListItemText key={index + 'date'} primary={date}/>
-              <ListItemText key={index + 'times'} primary={slot.slots.length}/>
-              <ListItemText key={index + 'times'} primary='Till bokning'/>
+            <ListItem component="a" href={`https://bokning.mittvaccin.se/klinik/${id}/bokning`} target='_blank' key={index + 'item'}>
+            <ListItemText key={index + 'dateplaceholder'} primary={date}/>
+            <ListItemText key={index + 'times'} primary={slot.slots.length}/>
             </ListItem>
            </>
             )
