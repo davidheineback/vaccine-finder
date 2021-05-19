@@ -11,7 +11,7 @@ export const StyledWrapper = styled(Box)`
   margin-top: 40px;
   min-height: 400px;
   min-width: 300px;
-  max-width: 32%;
+  max-width: 34%;
   background: rgba(255, 255, 255, 0.4);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(1.5px);
