@@ -17,6 +17,7 @@ export async function getAppointmentTypes (station) {
       const response = await categories.json()
       return response
   } catch (error) {
+    console.log(error.status)
     throw new Error(error)
   }
 }

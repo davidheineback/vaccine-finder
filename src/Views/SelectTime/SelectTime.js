@@ -75,7 +75,7 @@ function SelectTime() {
           const date = `20${slot.date.substring(0, 2)}-${slot.date.substring(2,4)}-${slot.date.substring(4)}`
             return(
             index === 0 ?
-            <>
+            <div key={index}>
             <ListItem key={index + 'list'}>
               <ListItemText key={index} primary={name[0].name}/>
             </ListItem>
@@ -87,12 +87,12 @@ function SelectTime() {
             <ListItemText key={index + 'dateplaceholder'} primary={date}/>
             <ListItemText key={index + 'times'} primary={slot.slots.length}/>
             </ListItem>
-            </>
+            </div>
             :
             <>
-            <ListItem component="a" href={`https://bokning.mittvaccin.se/klinik/${id}/bokning`} target='_blank' key={index + 'item'}>
-            <ListItemText key={index + 'dateplaceholder'} primary={date}/>
-            <ListItemText key={index + 'times'} primary={slot.slots.length}/>
+            <ListItem component="a" href={`https://bokning.mittvaccin.se/klinik/${id}/bokning`} target='_blank' key={index + 'item2'}>
+            <ListItemText key={index + 'dateplaceholder2'} primary={date}/>
+            <ListItemText key={index + 'times2'} primary={slot.slots.length}/>
             </ListItem>
            </>
             )
