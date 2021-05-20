@@ -11,12 +11,14 @@ import SelectTime from '../Views/SelectTime/SelectTime'
 import SelectAppointment from '../Views/SelectAppointment/SelectAppointment'
 import AppContainer from '../Views/AppContainer/AppContainer'
 import Wrapper from '../Components/Wrapper/Wrapper'
+import Header from '../Components/Header/Header'
 
 
 function App() {
   return (
     <GlobalState>
       <Router>
+        <Header/>
         <AppContainer>
           <Wrapper>
             <Switch>
