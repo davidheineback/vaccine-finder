@@ -7,7 +7,7 @@ export const StyledWrapper = styled(Box)`
     rgba(148, 187, 233, 0.8813726174063375) 11%,
     rgba(174, 238, 181, 0.9009804605435925) 100%
   );
-  margin-top: 40px;
+  margin-top: 0px;
   min-height: 400px;
   min-width: 300px;
   max-width: 32%;
@@ -22,4 +22,6 @@ export const StyledWrapper = styled(Box)`
   justify-content:center;
   flex-wrap:wrap;
   padding:1rem;
+  margin-left: auto;
+  margin-right: auto;
 `
