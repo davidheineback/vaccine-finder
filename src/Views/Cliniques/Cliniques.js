@@ -9,8 +9,9 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 
-function Cliniques() {
-  const { citySlug, setCitySlug, cliniques, county, setAppointmentData, setRedirect } = React.useContext(GlobalStateContext)
+function Cliniques({ match }) {
+  const { citySlug, setCitySlug, setCliniques, cliniques, county, setAppointmentData, setRedirect } = React.useContext(GlobalStateContext)
+  const region = match?.params?.region || county
   const [cities, setCities] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [appointmentDataReady, setAppointmentDataReady] = useState(false)
@@ -24,11 +25,13 @@ function Cliniques() {
         const filter = [...new Set(cityArray)].filter((city) => city.length > 0).sort()
         setCities(filter)
         setIsLoading(false)
+      } else {
+        await API.getCliniques(setCliniques, region)
+        setIsLoading(false)
+      }
     }
-  }
   
-  }, [cliniques])
-
+  }, [cliniques, setCliniques, region])
 
 
   async function handleCity({ target }) {
@@ -50,8 +53,8 @@ function Cliniques() {
         setAppointmentDataReady(true)
   }
 
-  if (!county) return <Redirect to='/' />
-  if (appointmentDataReady) return <Redirect to={`/${county}/${citySlug}/sok-metod`}/>
+  if (!region) return <Redirect to='/' />
+  if (appointmentDataReady) return <Redirect to={`/${region}/${citySlug}/sok-metod`}/>
   return isLoading ? (
     <Loader />
   ) : (
