@@ -3,6 +3,7 @@ import { Redirect, Link } from 'react-router-dom'
 import { GlobalStateContext } from '../../GlobalState/GlobalState'
 import { Loader } from '../../Utilities/Loader/Loader'
 import { StyledBackArrow } from '../../Utilities/BackArrow/BackArrowStyles'
+import { regions } from '../StartView/regions'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -11,9 +12,10 @@ import * as API from '../../App/fetch'
 
 
 function SelectTime() {
-  const { cliniques, appointmentData, fromDate, toDate } = React.useContext(GlobalStateContext)
+  const { county, cliniques, appointmentData, fromDate, toDate } = React.useContext(GlobalStateContext)
   const [isLoading, setIsLoading] = useState(true)
   const [availableTimes, setAvailableTime] = useState([])
+  const region = regions.filter(region => region.search === county)
 
   useEffect(() => {
     async function handleSearchNext() {
@@ -59,6 +61,9 @@ function SelectTime() {
       <ListItem>
         <ListItemText primary='Vi kunde tyvärr inte hitta några lediga tider enligt angivna sökpreferenser'/>
       </ListItem>
+      <ListItem style={{color: 'black'}} component='a' href={region[0].redirect} target='_blank'>
+        <ListItemText secondary='Klicka här för att besöka din region'/>
+      </ListItem>
           <Divider variant='inset' component='li' />
     </List>
     </>
@@ -83,14 +88,14 @@ function SelectTime() {
             <ListItemText key={index + 'dateplaceholder'} primary='Datum:'/>
             <ListItemText key={index + 'numberofTimes'} primary='Antal lediga tider'/>
             </ListItem>
-            <ListItem component="a" href={`https://bokning.mittvaccin.se/klinik/${id}/bokning`} target='_blank' key={index + 'item'}>
+            <ListItem style={{color: 'black'}} component="a" href={`https://bokning.mittvaccin.se/klinik/${id}/bokning`} target='_blank' key={index + 'item'}>
             <ListItemText key={index + 'dateplaceholder'} primary={date}/>
             <ListItemText key={index + 'times'} primary={slot.slots.length}/>
             </ListItem>
             </div>
             :
             <>
-            <ListItem component="a" href={`https://bokning.mittvaccin.se/klinik/${id}/bokning`} target='_blank' key={index + 'item2'}>
+            <ListItem style={{color: 'black'}} component="a" href={`https://bokning.mittvaccin.se/klinik/${id}/bokning`} target='_blank' key={index + 'item2'}>
             <ListItemText key={index + 'dateplaceholder2'} primary={date}/>
             <ListItemText key={index + 'times2'} primary={slot.slots.length}/>
             </ListItem>
