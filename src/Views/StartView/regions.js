@@ -45,7 +45,7 @@ export const regions = [
       county: 'Region Kalmar',
       search: 'kalmar',
       redirect: 'https://www.1177.se/Kalmar-lan/sjukdomar--besvar/lungor-och-luftvagar/inflammation-och-infektion-ilungor-och-luftror/om-covid-19--coronavirus/om-vaccin-mot-covid-19/boka-vaccination-mot-covid-19-i-kalmar-lan/#section-124357',
-      method: 'search'
+      method: 'redirect'
     },
     {
       county: 'Region Kronoberg',
@@ -99,7 +99,7 @@ export const regions = [
       county: 'Region Västernorrland',
       search: 'vasternorrland',
       redirect: 'https://www.1177.se/Vasternorrland/sjukdomar--besvar/lungor-och-luftvagar/inflammation-och-infektion-ilungor-och-luftror/om-covid-19--coronavirus/om-vaccin-mot-covid-19/vaccinationsenheter-i-vasternorrland/',
-      method: 'search'
+      method: 'redirect'
     },
     {
       county: 'Region Västmanland',
