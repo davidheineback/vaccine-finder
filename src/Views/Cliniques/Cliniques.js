@@ -37,13 +37,19 @@ function Cliniques({ match }) {
   async function handleCity({ target }) {
         const city = target.textContent.toLowerCase()
         setCitySlug(target.textContent.toLowerCase())
-        const stationIds = cliniques
+        let stationIds
+        if (city === 'kalmar') {
+          stationIds = ["1546"]
+        } else {
+          stationIds = cliniques
         .filter(
           (clinique) => clinique.booking_auto_search && (clinique.name.toLowerCase().includes(city) || clinique.city.toLowerCase().includes(city))
         )
         .map((clinique) => clinique.id)
+        }
 
         const data = stationIds.map(async (id) => {
+          console.log(id)
               const response = await API.getAppointmentTypes(id)
               return { id, response }
             })
