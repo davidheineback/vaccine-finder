@@ -23,4 +23,6 @@ export const StyledWrapper = styled(Box)`
   justify-content:center;
   flex-wrap:wrap;
   padding:1rem;
+  margin-left: auto;
+  margin-right: auto;
 `

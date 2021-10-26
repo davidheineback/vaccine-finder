@@ -20,14 +20,14 @@ export const regions = [
     {
       county: 'Region Gävleborg',
       search: 'gavleborg',
-      redirect: 'url',
-      method: 'https://www.1177.se/Gavleborg/sjukdomar--besvar/lungor-och-luftvagar/inflammation-och-infektion-ilungor-och-luftror/om-covid-19--coronavirus/om-vaccin-mot-covid-19/boka-tid-for-vaccination-mot-covid-19/#section-121299'
+      redirect: 'https://www.1177.se/Gavleborg/sjukdomar--besvar/lungor-och-luftvagar/inflammation-och-infektion-ilungor-och-luftror/om-covid-19--coronavirus/om-vaccin-mot-covid-19/boka-tid-for-vaccination-mot-covid-19/#section-121299',
+      method: 'redirect'
     },
     {
       county: 'Region Halland',
       search: 'halland',
-      redirect: 'url',
-      method: 'https://www.1177.se/Halland/sjukdomar--besvar/lungor-och-luftvagar/inflammation-och-infektion-ilungor-och-luftror/om-covid-19--coronavirus/om-vaccin-mot-covid-19/boka-vaccination-covid-19-i-halland/'
+      redirect: 'https://www.1177.se/Halland/sjukdomar--besvar/lungor-och-luftvagar/inflammation-och-infektion-ilungor-och-luftror/om-covid-19--coronavirus/om-vaccin-mot-covid-19/boka-vaccination-covid-19-i-halland/',
+      method: 'redirect'
     },
     {
       county: 'Region Jämtland Härjedalen',
@@ -38,8 +38,8 @@ export const regions = [
     {
       county: 'Region Jönköping',
       search: 'jonköping',
-      redirect: 'url',
-      method: 'https://www.1177.se/Jonkopings-lan/sjukdomar--besvar/lungor-och-luftvagar/inflammation-och-infektion-ilungor-och-luftror/om-covid-19--coronavirus/om-vaccin-mot-covid-19/nar-och-hur-kan-jag-vaccinera-mig-mot-covid-19/#section-126228'
+      redirect: 'https://www.1177.se/Jonkopings-lan/sjukdomar--besvar/lungor-och-luftvagar/inflammation-och-infektion-ilungor-och-luftror/om-covid-19--coronavirus/om-vaccin-mot-covid-19/nar-och-hur-kan-jag-vaccinera-mig-mot-covid-19/#section-126228',
+      method: 'redirect'
     },
     {
       county: 'Region Kalmar',
@@ -104,8 +104,8 @@ export const regions = [
     {
       county: 'Region Västmanland',
       search: 'vastmanland',
-      redirect: 'url',
-      method: 'https://www.1177.se/Vastmanland/sjukdomar--besvar/lungor-och-luftvagar/inflammation-och-infektion-ilungor-och-luftror/om-covid-19--coronavirus/om-vaccin-mot-covid-19/vaccination-mot-covid-19-i-vastmanland/#section-120854'
+      redirect: 'https://www.1177.se/Vastmanland/sjukdomar--besvar/lungor-och-luftvagar/inflammation-och-infektion-ilungor-och-luftror/om-covid-19--coronavirus/om-vaccin-mot-covid-19/vaccination-mot-covid-19-i-vastmanland/#section-120854',
+      method: 'redirect'
     },
     {
       county: 'Region Västra Götaland',
@@ -122,7 +122,7 @@ export const regions = [
     {
       county: 'Region Östergötland',
       search: 'ostergotland',
-      redirect: 'url',
-      method: 'https://www.1177.se/Ostergotland/sjukdomar--besvar/lungor-och-luftvagar/inflammation-och-infektion-ilungor-och-luftror/om-covid-19--coronavirus/om-vaccin-mot-covid-19/nar-och-hur-kan-jag-vaccinera-mig-mot-covid-19/#section-126228'
+      redirect: 'https://www.1177.se/Ostergotland/sjukdomar--besvar/lungor-och-luftvagar/inflammation-och-infektion-ilungor-och-luftror/om-covid-19--coronavirus/om-vaccin-mot-covid-19/nar-och-hur-kan-jag-vaccinera-mig-mot-covid-19/#section-126228',
+      method: 'redirect'
     }
   ]
