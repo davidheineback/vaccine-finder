@@ -44,7 +44,7 @@ function StartView() {
         </div>
         ))}
       <ListItem>
-        <ListItemText secondary='Följande regioner hanteras tyvärr ännu inte av hittavaccintid.se. Välj region för att bli omdirigread till bokningsinformation på 1177 för just din region'/>
+        <ListItemText secondary='Tack till alla som använt tjänsten och hittat sin tid för vaccination. Välj region för att bli omdirigread till bokningsinformation på 1177 för just din region.'/>
       </ListItem>
       </List>
       {otherCountys.map((item, index)=>(
